@@ -61,8 +61,6 @@ fn partition_data_in_two(v: &Vec<usize>) -> Vec<Vec<usize>>{
 * Sum up the all the integers in the given vector
 * @param v Vector of integers
 * @return Sum of integers in v
-* Note: this function has the same code as the reduce_data function.
-*       But don't change the code of map_data or reduce_data.
 */
 fn map_data(v: &Vec<usize>) -> usize{
     let mut sum = 0;
@@ -117,13 +115,6 @@ fn main() {
     print_partition_info(&xs);
 
     let mut intermediate_sums : Vec<usize> = Vec::new();
-
-    // MAP STEP: Process each partition
-
-    // CHANGE CODE START: Don't change any code above this line
-
-    // Change the following code to create 2 threads that run concurrently and each of which uses map_data() function to process one of the two partitions
-
     let xs_1 = xs[0].clone();
     let xs_2 = xs[1].clone();
     let t1 = thread::spawn(move || map_data(&xs_1));
@@ -133,8 +124,6 @@ fn main() {
     intermediate_sums.push(r1);
     intermediate_sums.push(r2);
 
-    // CHANGE CODE END: Don't change any code below this line until the next CHANGE CODE comment
-
     // Print the vector with the intermediate sums
     println!("Intermediate sums = {:?}", intermediate_sums);
 
@@ -142,7 +131,6 @@ fn main() {
     let sum = reduce_data(&intermediate_sums);
     println!("Sum = {}", sum);
 
-    // CHANGE CODE: Add code that does the following:
     // 1. Calls partition_data to partition the data into equal partitions
     // 2. Calls print_partition_info to print info on the partitions that have been created
     // 3. Creates one thread per partition and uses each thread to concurrently process one partition
@@ -166,9 +154,6 @@ fn main() {
 }
 
 /*
-* CHANGE CODE: code this function
-* Note: Don't change the signature of this function
-*
 * Partitions the data into a number of partitions such that
 * - the returned partitions contain all elements that are in the input vector
 * - if num_elements is a multiple of num_partitions, then all partitions must have equal number of elements
